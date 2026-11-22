@@ -10,12 +10,12 @@ A high-performance, ultra-lightweight, and robust pure C implementation of `tg-w
 
 ---
 
-### 🇷🇺 Краткое описание на русском
+### Краткое описание на русском
 **tg-ws-proxy-unix** — это легковесный прокси-сервер на чистом Си для обхода блокировок и замедлений Telegram в сетях с цензурой (РКН / ТСПУ). Маскирует трафик Telegram (MTProto и SOCKS5) под стандартные веб-сокеты Cloudflare (WSS HTTPS), позволяя клиентам без сбоев подключаться к серверам Telegram (DC 1–5), скачивать медиа и совершать звонки. Потребляет всего **2–3 МБ оперативной памяти**, что делает его идеальным решением для слабых VPS, домашних серверов и роутеров с OpenWrt.
 
 ---
 
-## ⚡ Performance: C vs Python Edition
+## Performance: C vs Python Edition
 
 | Metric | tg-ws-proxy (Python) | tg-ws-proxy-unix (Pure C) |
 | :--- | :--- | :--- |
@@ -24,11 +24,11 @@ A high-performance, ultra-lightweight, and robust pure C implementation of `tg-w
 | **Binary Size** | ~50+ MB (runtime/deps) | **~40 KB** single native binary |
 | **Startup Time** | ~1.5 – 2.5 seconds | **< 5 milliseconds** |
 | **Dependencies** | Python 3.10+, pip, SSL, cffi | **Zero** (standard libc + libssl) |
-| **Router Support** | ❌ Heavy for OpenWrt | **✅ Ideal for OpenWrt routers** |
+| **Router Support** | Heavy for OpenWrt | **Ideal for OpenWrt routers** |
 
 ---
 
-## 🛡️ Censorship Circumvention Algorithms (Методы обхода блокировок)
+## Censorship Circumvention Algorithms (Методы обхода блокировок)
 
 1. **Cloudflare Reverse Proxy Pool (CfProxy)**:
    - Contains an embedded rotating pool of 20 encrypted Cloudflare reverse-proxy domains (`.co.uk`), dynamically decrypted at runtime.
@@ -57,7 +57,7 @@ A high-performance, ultra-lightweight, and robust pure C implementation of `tg-w
 
 ---
 
-## 🚀 Quick Start & Installation
+## Quick Start & Installation
 
 ### 1. Requirements
 - GCC or Clang
@@ -106,11 +106,11 @@ Port: 8080 | TCP Fragmentation: ENABLED | Pool: 20 CF Nodes
    tg://socks?server=127.0.0.1&port=8080
 ====================================================
 ```
-Simply click the link on your machine or add it into your Telegram client settings (**Settings → Data and Storage → Proxy Settings**).
+Simply click the link on your machine or add it into your Telegram client settings (**Settings -> Data and Storage -> Proxy Settings**).
 
 ---
 
-## ⚙️ Command-Line Options
+## Command-Line Options
 
 ```
 Usage: ./tg-ws-proxy [port] [options]
@@ -130,7 +130,7 @@ Options:
 
 ---
 
-## 🔧 Autostart & Service Installation
+## Autostart & Service Installation
 
 The proxy comes with a smart auto-installation feature that detects your init system and sets up the daemon:
 
@@ -152,7 +152,7 @@ journalctl -t tg-ws-proxy -f
 
 ---
 
-## 🌐 Configuration (`config.json`)
+## Configuration (`config.json`)
 
 Settings can be persisted in `config.json` in the working directory:
 ```json
@@ -165,7 +165,7 @@ Settings can be persisted in `config.json` in the working directory:
 
 ---
 
-## 📂 Project Architecture
+## Project Architecture
 
 ```
 tg-ws-proxy-unix/
@@ -173,8 +173,14 @@ tg-ws-proxy-unix/
 │   └── ws_client.h       # WebSocket over TLS client header
 ├── src/
 │   ├── main.c            # Core multiplexer, SOCKS5 interception, MTProto router, autostart
-│   ├── ws_client.c       # OpenSSL WSS client, RFC 6455 masking, ping/pong keepalive
-│   └── mtproto_test.c    # MTProto handshake test client
+│   └── ws_client.c       # OpenSSL WSS client, RFC 6455 masking, ping/pong keepalive
+├── tests/
+│   ├── mtproto_test.c    # MTProto handshake test client
+│   ├── test_domains.c    # Domain decoding test
+│   ├── test_raw.c        # Raw socket test
+│   ├── test_resolve.c    # DNS resolution test
+│   ├── test_ws.c         # WSS connection test
+│   └── test_wss.py       # Python reference test script
 ├── Makefile              # Build and test orchestration
 ├── README.md             # Documentation and guide
 └── config.json           # Local proxy configuration (generated)
@@ -182,12 +188,12 @@ tg-ws-proxy-unix/
 
 ---
 
-## 🔍 Keywords & Topics / Теги для поиска
+## Keywords & Topics / Теги для поиска
 
 `telegram-proxy` `tg-ws-proxy` `mtproto-proxy` `socks5-proxy` `cloudflare-workers` `websocket-proxy` `dpi-bypass` `rkn-bypass` `tspu-bypass` `anti-censorship` `censorship-circumvention` `c99` `unix` `linux` `freebsd` `openwrt` `обход-блокировок-телеграм` `обход-тспу` `прокси-телеграм-роутер`
 
 ---
 
-## 📄 License
+## License
 
-Distributed under the [MIT License](LICENSE).
+Distributed under the MIT License.

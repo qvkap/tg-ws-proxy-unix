@@ -5,8 +5,9 @@ LDFLAGS = -pthread -lssl -lcrypto
 
 SRC_DIR = src
 OBJ_DIR = obj
+TEST_DIR = tests
 
-SRCS = $(filter-out $(SRC_DIR)/mtproto_test.c, $(wildcard $(SRC_DIR)/*.c))
+SRCS = $(wildcard $(SRC_DIR)/*.c)
 OBJS = $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRCS))
 
 TARGET = tg-ws-proxy
@@ -22,8 +23,8 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
 $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)
 
-tests: all $(SRC_DIR)/mtproto_test.c
-	$(CC) $(CFLAGS) -o mtproto_test $(SRC_DIR)/mtproto_test.c $(LDFLAGS)
+tests: all $(TEST_DIR)/mtproto_test.c
+	$(CC) $(CFLAGS) -o mtproto_test $(TEST_DIR)/mtproto_test.c $(LDFLAGS)
 	@echo "Starting proxy in background for testing..."
 	./$(TARGET) 8080 & \
 	PROXY_PID=$$!; \

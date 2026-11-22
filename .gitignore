@@ -1,6 +1,15 @@
 # Compiled binaries
 tg-ws-proxy
 mtproto_test
+test_domains
+test_raw
+test_resolve
+test_ws
+tests/test_domains
+tests/test_raw
+tests/test_resolve
+tests/test_ws
+tests/mtproto_test
 
 # Object files
 obj/
